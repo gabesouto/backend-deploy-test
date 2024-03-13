@@ -1,7 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
-// import UserController from '../controllers/user.controller';
+import UserController from '../controllers/user.controller';
 
-// const userController = new UserController();
+const userController = new UserController();
 
 const userRouter = Router();
 
@@ -15,6 +15,6 @@ const userRouter = Router();
 //    (req: Request, res: Response, next:NextFunction) => userController.login(req, res, next),
 // );
 
-userRouter.get('/user', (req, res) => res.json({ ok: "user up" }));
+userRouter.get('/user', (req, res) =>  userController.getUsers(req, res))
 
 export default userRouter;
