@@ -1,16 +1,54 @@
- import express, { Request, Response } from 'express'
+import  express from 'express';
+// import SequelizeProduct from './models/product.model';
+// import router from './routes/router';
+// import { errorMiddleware } from './middlewares/error';
+// import cors from 'cors';
 
-  const app = express()
-  const port = process.env.PORT || 3005
 
-  app.get('/', (_req: Request, res: Response) => {
-    return res.send('Express Typescript on Vercel')
-  })
+class App {
+  public app: express.Express;
 
-  app.get('/ping', (_req: Request, res: Response) => {
-    return res.send('pong 🏓')
-  })
+  constructor() {
+    this.app = express();
 
-  app.listen(port, () => {
-    return console.log(`Server is listening on ${port}`)
-  })
+    this.config();
+    // this.routes();
+    // this.error();
+
+    this.app.get('/', (req, res) => res.json({ ok: true }));
+  }
+
+  private config():void {
+    const accessControl: express.RequestHandler = (_req, res, next) => {
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS,PUT,PATCH');
+      res.header('Access-Control-Allow-Headers', '*');
+      next();
+    };
+    // this.app.use(cors());
+
+    this.app.use(express.json());
+    this.app.use(accessControl);
+  }
+
+  // private routes(): void {
+  //   this.app.use(router);
+    
+  // }
+
+  // private error():void {
+  //   this.app.use(errorMiddleware)  
+  // }
+
+  public start(): void {
+    this.app.listen(3001, () => console.log(`Running on port 3001`))
+    this.app.get("/", (req, res) => {
+      res.send("server is running")
+    })
+
+}
+
+}
+
+export { App };
+
