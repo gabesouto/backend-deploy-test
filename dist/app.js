@@ -6,14 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
 // import SequelizeProduct from './models/product.model';
-// import router from './routes/router';
+const router_1 = __importDefault(require("./routes/router"));
 // import { errorMiddleware } from './middlewares/error';
 const cors_1 = __importDefault(require("cors"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
         this.config();
-        // this.routes();
+        this.routes();
         // this.error();
         this.app.get('/', (req, res) => res.json({ ok: true }));
     }
@@ -29,7 +29,7 @@ class App {
         this.app.use(accessControl);
     }
     routes() {
-        // this.app.use(router);
+        this.app.use(router_1.default);
     }
     // private error():void {
     //   this.app.use(errorMiddleware)  

@@ -1,6 +1,6 @@
 import  express from 'express';
 // import SequelizeProduct from './models/product.model';
-// import router from './routes/router';
+import router from './routes/router';
 // import { errorMiddleware } from './middlewares/error';
 import cors from 'cors';
 
@@ -12,7 +12,7 @@ class App {
     this.app = express();
 
     this.config();
-    // this.routes();
+    this.routes();
     // this.error();
 
     this.app.get('/', (req, res) => res.json({ ok: true }));
@@ -32,7 +32,7 @@ class App {
   }
 
   private routes(): void {
-    // this.app.use(router);
+    this.app.use(router);
     
   }
 
