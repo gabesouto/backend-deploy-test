@@ -10,16 +10,16 @@ productRouter.get(
 );
 
 productRouter.post(
-  '/products', (req: Request, res: Response) => productController.createProduct(req, res)
+  '/products', authMiddleware, (req: Request, res: Response) => productController.createProduct(req, res)
 );
 
 productRouter.put(
-  '/products/:id/', (req: Request, res: Response) => productController.updateProduct(req, res)
+  '/products/:id/', authMiddleware, (req: Request, res: Response) => productController.updateProduct(req, res)
 );
 
 
 productRouter.delete(
-  '/products/:id/',  (req: Request, res: Response) => productController.deleteProduct(req, res)
+  '/products/:id/', authMiddleware,  (req: Request, res: Response) => productController.deleteProduct(req, res)
 );
 
 export default productRouter;
