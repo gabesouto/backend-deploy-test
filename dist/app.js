@@ -5,16 +5,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const express_1 = __importDefault(require("express"));
-// import SequelizeProduct from './models/product.model';
 const router_1 = __importDefault(require("./routes/router"));
-// import { errorMiddleware } from './middlewares/error';
+const error_1 = require("./middlewares/error");
 const cors_1 = __importDefault(require("cors"));
 class App {
     constructor() {
         this.app = (0, express_1.default)();
         this.config();
         this.routes();
-        // this.error();
+        this.error();
         this.app.get('/', (req, res) => res.json({ ok: true }));
     }
     config() {
@@ -31,9 +30,9 @@ class App {
     routes() {
         this.app.use(router_1.default);
     }
-    // private error():void {
-    //   this.app.use(errorMiddleware)  
-    // }
+    error() {
+        this.app.use(error_1.errorMiddleware);
+    }
     start() {
         this.app.listen(3001, () => console.log(`Running on port 3001`));
         this.app.get("/", (req, res) => {

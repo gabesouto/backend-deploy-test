@@ -1,7 +1,7 @@
 import  express from 'express';
-// import SequelizeProduct from './models/product.model';
+import SequelizeProduct from './models/product.model';
 import router from './routes/router';
-// import { errorMiddleware } from './middlewares/error';
+import { errorMiddleware } from './middlewares/error';
 import cors from 'cors';
 
 
@@ -13,7 +13,7 @@ class App {
 
     this.config();
     this.routes();
-    // this.error();
+    this.error();
 
     this.app.get('/', (req, res) => res.json({ ok: true }));
   }
@@ -36,9 +36,9 @@ class App {
     
   }
 
-  // private error():void {
-  //   this.app.use(errorMiddleware)  
-  // }
+  private error():void {
+    this.app.use(errorMiddleware)  
+  }
 
   public start(): void {
     this.app.listen(3001, () => console.log(`Running on port 3001`))

@@ -5,16 +5,14 @@ const userController = new UserController();
 
 const userRouter = Router();
 
-// userRouter.post(
-//    '/signup',
-//    (req: Request, res: Response, next:NextFunction) => userController.create(req, res, next),
-// );
+userRouter.post(
+   '/signup',
+   (req: Request, res: Response, next:NextFunction) => userController.create(req, res, next),
+);
 
-// userRouter.post(
-//    '/signin',
-//    (req: Request, res: Response, next:NextFunction) => userController.login(req, res, next),
-// );
-
-userRouter.get('/user', (req, res) =>  userController.getUsers(req, res))
+userRouter.post(
+   '/signin',
+   (req: Request, res: Response, next:NextFunction) => userController.login(req, res, next),
+);
 
 export default userRouter;
